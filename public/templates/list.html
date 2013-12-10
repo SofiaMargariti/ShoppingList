@@ -1,0 +1,26 @@
+<ul id="shopping-list">
+    <li>Title: <%= title %></li>
+    <li>Created: <%= dateCreated %></li>
+    <% if (executed) { %>
+      <li>Executed at: <%= dateExecuted %></li>
+    <% } %>
+   <li><input id="execute" type="button" value="Execute"></input></li>   
+   <li><table id="items">
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Price</th>
+      <th>Quantity</th>
+    </tr>
+   </table></li> 
+
+   <li id="add_item">
+       <input type="text" name="name" />
+       <input type="number" name="price" />
+       <input type="text" name="description"  />
+       <input type="number" name="quantity" value=1 />
+       <button id="add">Add</button>
+   </li>
+   <li><button id="add_item_button">Add Item</button></li>
+   <li><button id="save">Save</button></li>
+</ul>
