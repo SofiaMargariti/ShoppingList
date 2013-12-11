@@ -6,7 +6,7 @@ define(['text!templates/lists.html','text!templates/list_summary.html', 'Shoppin
     template: _.template(listsTemplate),
 
     events: {
-      'click input[type=submit]': 'on_submit'
+      'click button[type=submit]': 'on_submit'
     },
 
     initialize: function(){
@@ -17,7 +17,7 @@ define(['text!templates/lists.html','text!templates/list_summary.html', 'Shoppin
     },
 
     render: function(){
-      $(this.el).html(this.template);
+      $(this.el).append(this.template);
       this.model.forEach(this.render_list_summary);
       return this;
     },
@@ -29,7 +29,7 @@ define(['text!templates/lists.html','text!templates/list_summary.html', 'Shoppin
 
     on_submit: function(){
       var that = this;
-
+      
       var l = new List({
         title: this.$('input[name="title"]').val(),
         description: this.$('input[name="description"]').val()  
