@@ -16,7 +16,7 @@ require.config({
     'Bootstrap': ['jQuery'],
     'Backbone': ['Underscore', 'jQuery'],
     'BackboneRelational': ['Backbone'],
-    'Shopping': ['BackboneRelational', 'Bootstrap']
+    'Shopping': ['BackboneRelational']
   }
 });
 

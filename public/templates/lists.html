@@ -1,11 +1,21 @@
-<h2>Latest Lists</h2>
+<table class="table" id="latest_lists">
+  <tr><th>Lists</th></tr>
+</table>
 
-<div id="latest_lists"></div>
-
-<ul>
-  <li>List name: <input type="text" name="title"/></li>
-  <li>Description: <input type="text" name="description"/></li>
-  <li><input type="submit" value="New List"></li>
-</ul>
+<div class="panel-info">
+  <div class="panel-body">
+    <form role="form">
+      <div class="form-group">
+        <label for="list-title">Title</label>
+        <input type="text" class="form-control" id="list-title" name="title"/></li>
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" class="form-control" id="description" name="description"/>
+      </div>
+      <button type="submit" class="btn btn-default">New List</button>
+    </form>
+  </div>
+</div>
 
 <div class="error_messages"></div>

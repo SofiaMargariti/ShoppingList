@@ -1,6 +1,6 @@
 define(['text!templates/lists.html','text!templates/list_summary.html', 'ShoppingView', 'models/List'], function(listsTemplate, SummaryTemplate, ShoppingView, List){
   var listsView = ShoppingView.extend({
-    el: $('#content'),
+    el: $('#left'),
     tagName: 'li',
     className: 'lists_view',
     template: _.template(listsTemplate),
@@ -23,9 +23,8 @@ define(['text!templates/lists.html','text!templates/list_summary.html', 'Shoppin
     },
 
     render_list_summary: function(list){
-      console.log(list.toJSON())
       var summary_template = _.template(SummaryTemplate)
-      $('#latest_lists').prepend(summary_template(list.toJSON()));
+      $('#latest_lists:first').append(summary_template(list.toJSON()));
     },
 
     on_submit: function(){

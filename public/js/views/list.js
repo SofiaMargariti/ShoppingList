@@ -2,7 +2,7 @@ define(['ShoppingView', 'views/item', 'text!templates/list.html',  'models/Item'
 function(ShoppingView, ItemView, listTemplate, Item)
 {
   var listView = ShoppingView.extend({
-    el: $('#content'),
+    el: $('#right'),
     
     events: {
       'click #add': 'addItem',
