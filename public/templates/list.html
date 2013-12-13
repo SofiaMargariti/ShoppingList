@@ -1,26 +1,49 @@
-<ul id="shopping-list">
-    <li>Title: <%= title %></li>
-    <li>Created: <%= dateCreated %></li>
-    <% if (executed) { %>
-      <li>Executed at: <%= dateExecuted %></li>
+<div class="panel panel-default">
+  <div class="panel-heading ">
+    <div class="row">
+      <div class="col-md-8 text-primary"><%= title %></div>
+      <div class="col-md-4 small">At: <%= dateCreated %></div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <% if (items.length > 0 ) { %>
+      <table class="table" id="items">
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+        </tr>
+      </table> 
+      <% if (executed) { %>
+        Executed at: <%= dateExecuted %>
+      <% } else { %>
+        <button id="execute" class="btn">Execute</button>   
+      <% }
+    } else { %>
+      <p>No items in this list.<p>
     <% } %>
-   <li><input id="execute" type="button" value="Execute"></input></li>   
-   <li><table id="items">
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Price</th>
-      <th>Quantity</th>
-    </tr>
-   </table></li> 
-
-   <li id="add_item">
-       <input type="text" name="name" />
-       <input type="number" name="price" />
-       <input type="text" name="description"  />
-       <input type="number" name="quantity" value=1 />
-       <button id="add">Add</button>
-   </li>
-   <li><button id="add_item_button">Add Item</button></li>
-   <li><button id="save">Save</button></li>
-</ul>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <form class="form-inline" role="form" id="add_item" method="post">
+      <div class="form-group">
+        <label>Name</label>
+        <input class="form-control" type="text" name="name" placeholder="Item name.."/>
+      </div>
+      <div class="form-group" style="width:10%;">
+        <label>Price</label>
+        <input class="form-control" type="number" name="price" />
+      </div>
+      <div class="form-group" style="width:10%;">
+        <label>Quantity</label>
+        <input class="form-control" type="number" name="quantity" value=1 />
+      </div>
+      <div class="form-group">
+        <button class="btn" type="submit" id="add">Add</button>
+      </div>
+    </form>
+    <button class="btn" id="add_item_button">Add Item</button></li>
+  </div>
+</div>
+<button class="btn" id="save">Save</button></li>
