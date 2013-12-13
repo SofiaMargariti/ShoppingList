@@ -1,33 +1,57 @@
-define(['text!templates/lists.html','text!templates/list_summary.html', 'ShoppingView', 'models/List'], function(listsTemplate, SummaryTemplate, ShoppingView, List){
+define(['text!templates/left.html','text!templates/lists.html','text!templates/list_summary.html', 'ShoppingView', 'models/List'], function(mainTemplate, listsTemplate, summaryTemplate, ShoppingView, List){
   var listsView = ShoppingView.extend({
     el: $('#left'),
     tagName: 'li',
     className: 'lists_view',
-    template: _.template(listsTemplate),
+    page: 1,
+    perPage: 10,
+    totalPages: 0,
+    template: _.template(mainTemplate),
+    listsTemplate: _.template(listsTemplate),
+    summaryTemplate: _.template(summaryTemplate),
 
     events: {
-      'click button[type=submit]': 'on_submit'
+      'click #new_list': 'on_submit',
+      'click .pagination a': 'changePage'
     },
 
     initialize: function(){
       _.bindAll(this, 'render', 'on_submit');
-      this.model.bind('reset', this.render);
-      this.model.bind('change', this.render);
-      this.model.bind('add', this.render_list_summary);
+      //this.model.bind('reset', this.render_lists);
+      //this.model.bind('change', this.render_lists);
+      //this.model.bind('add', this.render_lists);
     },
 
-    render: function(){
-      $(this.el).append(this.template);
-      this.model.forEach(this.render_list_summary);
+    changePage: function(event){
+      this.page = parseInt($(event.target).data('page'));
+      this.render_lists();
+    },
+    
+    render_lists: function(){
+      var that = this;
+      this.totalPages = Math.floor((this.model.length / this.perPage)) + 1;
+
+      var start = (this.page - 1) * this.perPage;
+      var end = start + this.perPage;
+      var subset = _.filter(this.model.models, function(num, index){
+        return (index >= start) && (index <= end);
+      });
+
+      $('#list-panel').empty();
+      $('#list-panel').append(this.listsTemplate({ totalPages: this.totalPages }));
+      subset.forEach(function(list){
+        $('#latest_lists:first').append(that.summaryTemplate(list.toJSON()));
+      });
       return this;
     },
 
-    render_list_summary: function(list){
-      var summary_template = _.template(SummaryTemplate)
-      $('#latest_lists:first').append(summary_template(list.toJSON()));
+    render: function(list){
+      $(this.el).append(this.template);
+      this.render_lists();
     },
 
-    on_submit: function(){
+    on_submit: function(event){
+      event.preventDefault();
       var that = this;
       
       var l = new List({
@@ -48,5 +72,3 @@ define(['text!templates/lists.html','text!templates/list_summary.html', 'Shoppin
 
   return listsView;
 });
-
-

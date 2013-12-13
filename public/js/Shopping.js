@@ -1,7 +1,7 @@
 define(['router'], function(router){
   var initialize = function(){
-    window.location.hash = 'lists';
     Backbone.history.start();
+   // window.location.hash = 'lists';
   }
 
   return {

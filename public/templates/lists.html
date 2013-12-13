@@ -1,22 +1,8 @@
-<div class="panel-info">
-  <div class="panel-body">
-    <table class="table" id="latest_lists"></table>
-
-    <div class="panel-info">
-      <div class="panel-body">
-        <form role="form">
-          <div class="form-group">
-            <label for="list-title">Title</label>
-            <input type="text" class="form-control" id="list-title" name="title"/></li>
-          </div>
-          <div class="form-group">
-            <label for="description">Description</label>
-            <input type="text" class="form-control" id="description" name="description"/>
-          </div>
-          <button type="submit" class="btn btn-default">New List</button>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="error_messages"></div>
+<table class="table" id="latest_lists"></table>
+<ul class="pagination">
+  <li><a data-page="1">&laquo;</a></li>
+  <% for(var i = 0; i < totalPages; i++){ %>
+  <li><a data-page="<%= i+1 %>"><%= i + 1 %></a><li>
+<% } %>
+<li><a data-page="<%= totalPages %>">&raquo;</a></li>
+</ul>

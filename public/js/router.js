@@ -3,6 +3,7 @@ define(['views/index', 'views/list', 'views/items', 'views/lists', 'views/summar
     current_view: null,
 
     routes: {
+      '': 'showLists',
       'index': 'index',
       'newList': 'newList',
       'items': 'items',
