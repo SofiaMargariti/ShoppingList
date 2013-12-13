@@ -12,7 +12,8 @@ define(['text!templates/left.html','text!templates/lists.html','text!templates/l
 
     events: {
       'click #new_list': 'on_submit',
-      'click .pagination a': 'changePage'
+      'click .pagination a': 'change_page',
+      'click #latest_lists td': 'show_list'
     },
 
     initialize: function(){
@@ -22,7 +23,7 @@ define(['text!templates/left.html','text!templates/lists.html','text!templates/l
       //this.model.bind('add', this.render_lists);
     },
 
-    changePage: function(event){
+    change_page: function(event){
       this.page = parseInt($(event.target).data('page'));
       this.render_lists();
     },
@@ -66,7 +67,15 @@ define(['text!templates/left.html','text!templates/lists.html','text!templates/l
           console.log(err);
         }
       });
-    }
+    },
+
+    show_list: function(event){
+      var row = $(event.target)[0];
+      var id = $(row).data('id'); 
+      $(row.parentElement).css({'background': '#456'});
+      $(row.parentElement).siblings().css({'background': '#fff'});
+      window.location.hash = 'list/' + encodeURIComponent(id);
+    },
 
   });
 
