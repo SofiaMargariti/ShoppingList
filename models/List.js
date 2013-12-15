@@ -1,4 +1,4 @@
-module.exports = function(app, mongoose){
+module.exports = function(mongoose){
   var Schema = mongoose.Schema;
 
   var ListSchema = new Schema({
@@ -15,14 +15,8 @@ module.exports = function(app, mongoose){
     executed: { type: Boolean, default: false}
   });
 
-  var ItemSchema = new Schema({
-    name: Schema.Types.ObjectId,
-    price: Number,
-    description: String
-  });
-
   var List = mongoose.model('List', ListSchema);
-  var Item = mongoose.model('Item', ItemSchema);
+  var Item = require('./Item.js')(mongoose);
 
   var add = function(title, description, callback){
     var list = new List({
@@ -70,7 +64,6 @@ module.exports = function(app, mongoose){
     add: add,
     addItem: addItem,
     calculateTotal: calculateTotal,
-    Item: Item,
     List: List
   }
 }
