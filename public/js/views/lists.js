@@ -47,7 +47,7 @@ define(['text!templates/left.html','text!templates/lists.html','text!templates/l
     },
 
     render: function(list){
-      $(this.el).append(this.template);
+      $(this.el).html(this.template);
       this.render_lists();
     },
 

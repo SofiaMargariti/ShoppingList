@@ -15,7 +15,11 @@ app.configure(function(){
 });
 
 app.get('/', function(req, res){
-  res.render('index.jade');
+  res.render('lists.jade');
+});
+
+app.get('/dashboard', function(req, res){
+  res.render('dashboard.jade');
 });
 
 app.get('/api/list/:id', function(req, res){
