@@ -11,13 +11,13 @@ define(['text!templates/left.html','text!templates/lists.html','text!templates/l
     summaryTemplate: _.template(summaryTemplate),
 
     events: {
-      'click #new_list': 'on_submit',
+      'submit #new_list': 'new_list',
       'click .pagination a': 'change_page',
       'click #latest_lists td': 'show_list'
     },
 
     initialize: function(){
-      _.bindAll(this, 'render', 'on_submit');
+      _.bindAll(this, 'render', 'new_list');
       //this.model.bind('reset', this.render_lists);
       //this.model.bind('change', this.render_lists);
       //this.model.bind('add', this.render_lists);
@@ -51,14 +51,16 @@ define(['text!templates/left.html','text!templates/lists.html','text!templates/l
       this.render_lists();
     },
 
-    on_submit: function(event){
+    new_list: function(event){
       event.preventDefault();
       var that = this;
-      
+      var $form = $(event.target);
+
       var l = new List({
-        title: this.$('input[name="title"]').val(),
-        description: this.$('input[name="description"]').val()  
+        title: $form.find("input[name='title']").val(),
+        description: $form.find('input[name="description"]').val()  
       });
+
       l.save({}, { success: function(list, response){
           that.model.add(list, {at: 0});
           window.location.hash = 'list/' + list.get('_id');

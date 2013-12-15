@@ -34,7 +34,6 @@ module.exports = function(mongoose){
     var item_doc = new Item({
       name: item['name'],
       price: item['price'],
-      description: item['description'] 
     });
 
     item.save(function(err){
