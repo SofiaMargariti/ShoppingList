@@ -3,8 +3,8 @@ var app = express();
 var mongoose = require('mongoose');
 var dbPath = 'mongodb://localhost/shopping';
 
-//var Item = require('./models/Item')(mongoose);
-var List = require('./models/List')(mongoose);
+var Item = require('./models/Item')(mongoose);
+var List = require('./models/List')(mongoose, Item);
 
 app.configure(function(){
   app.use(express.bodyParser());
@@ -59,6 +59,15 @@ app.put('/api/list/:id', function(req, res){
 app.get('/api/list', function(req, res){
   var lists = List.findAll(function(lists){
     res.send(lists);
+  });
+});
+
+app.get('/api/item/search/:str', function(req, res){
+  str = req.params.str;
+  console.log(str);
+  Item.findByString(str, function(items){
+    console.log(items);
+    res.send(items);
   });
 });
 

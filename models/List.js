@@ -1,4 +1,4 @@
-module.exports = function(mongoose){
+module.exports = function(mongoose, Item){
   var Schema = mongoose.Schema;
 
   var ListSchema = new Schema({
@@ -16,7 +16,6 @@ module.exports = function(mongoose){
     executed: { type: Boolean, default: false}
   });
 
-  var Item = require('./Item')(mongoose);
   var List = mongoose.model('List', ListSchema);
 
   var add = function(title, description, callback){

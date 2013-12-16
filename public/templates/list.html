@@ -14,12 +14,12 @@
           <th>Quantity</th>
         </tr>
       </table> 
+      <p>Total: <%= total %> &euro;</p>
       <% if (executed) { %>
         Executed at: <%= dateExecuted %>
       <% } else { %>
         <button id="execute" class="btn">Execute</button>   
       <% }
-      <p>Total: <%= total %></p>
     } else { %>
       <p>No items in this list.<p>
     <% } %>
@@ -33,15 +33,15 @@
         <input class="form-control" type="text" name="name" placeholder="Item name.."/>
       </div>
       <div class="form-group" style="width:10%;">
-        <label>Price</label>
-        <input class="form-control" type="number" name="price" />
+        <label>Price(&euro;)</label>
+        <input class="form-control" name="price" /> 
       </div>
       <div class="form-group" style="width:10%;">
         <label>Quantity</label>
         <input class="form-control" type="number" name="quantity" value=1 />
       </div>
       <div class="form-group">
-        <button class="btn" type="submit">Add</button>
+        <button class="btn" type="submit">Add Item</button>
       </div>
     </form>
   </div>
