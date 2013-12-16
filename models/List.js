@@ -26,7 +26,6 @@ module.exports = function(mongoose){
     });
 
     list.save(function(err, doc){
-      console.log(doc);
       callback(doc);
     });
   };
@@ -55,17 +54,19 @@ module.exports = function(mongoose){
 
   var findAll = function(callback){
     List.find({}, null, function(err, docs){
+      if (err) {console.log(err)}
       callback(docs);
     });
   };
-  var calculateTotal = function(list){
+
+  var calculateTotal = function(list, callback){
     var items = list.items;
     var total = 0;
     for (var i=0; i< items.length; i++){
       total += items[i].price * items[i].quantity;
     }
     list.total = total;
-    list.save(list);
+    callback(list);
   };
 
   return {

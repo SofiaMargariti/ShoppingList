@@ -5,9 +5,7 @@ function(ShoppingView, ItemView, listTemplate, Item)
     el: $('#right'),
     
     events: {
-      'click #add': 'addItem',
-      'click #add_item_button': 'showForm',
-      'click #save': 'saveList'
+      'submit #add_item': 'addItem'
     },
 
     initialize: function(){
@@ -15,32 +13,22 @@ function(ShoppingView, ItemView, listTemplate, Item)
     },
 
 
-    showForm: function(){
-      $('#add_item_button').hide();
-      $('#add_item').show();
-    },
-
     addItem: function(event){
+      event.preventDefault();
+      var $form = $(event.target);
       var item = {
-        name: $("input[name='name']").val(), 
-        price: $("input[name='price']").val(), 
-        description: $("input[name='description']").val(), 
-        quantity: $("input[name='quantity']").val()  
+        name: $form.find("input[name='name']").val(), 
+        price: $form.find("input[name='price']").val(), 
+        quantity: $form.find("input[name='quantity']").val()  
       };
       this.model.get('items').push(item);
-      this.render();
-    },
-
-    saveList: function(){
       this.model.save();
-      console.log(this.model.get('items').toJSON());
+      this.render();
     },
 
     render: function() {
       var template = _.template(listTemplate);
       $(this.el).html(template(this.model.toJSON()));
-      
-      $('#add_item').hide();
       
       var itemCollection = this.model.get('items');
       if ( null != itemCollection ){

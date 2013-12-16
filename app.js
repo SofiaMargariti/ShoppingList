@@ -25,9 +25,7 @@ app.get('/dashboard', function(req, res){
 
 app.get('/api/list/:id', function(req, res){
   var listId = req.params.id;
-  console.log(listId);
-  List.findById(listId, function(err, list){
-    console.log(list);
+  List.findById(listId, function(list){
     res.send(list);
   });  
 });
@@ -41,23 +39,25 @@ app.post('/api/list', function(req, res){
 });
 
 app.put('/api/list/:id', function(req, res){
-  List.findById(req.params.id, function(err, list){
+  List.findById(req.params.id, function(list){
     list.title = req.param('title');
     list.date_executed = req.param('date_executed');
     list.executed = req.param('executed');
     list.items = req.param('items');
-    list.save(function(err, l){
-      if (err){
-        res.send(400);
-      } else {
-        res.send(l);
-      }
+    List.calculateTotal(list, function(l){
+      l.save(function(err, l){
+        if (err){
+          res.send(400);
+        } else {
+          res.send(l);
+        }
+      });
     });
   });
 });
 
 app.get('/api/list', function(req, res){
-  var lists = List.findAll(function(err, lists){
+  var lists = List.findAll(function(lists){
     res.send(lists);
   });
 });
