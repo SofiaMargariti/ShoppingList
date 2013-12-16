@@ -37,9 +37,8 @@ function(ShoppingView, ItemView, listTemplate, Item)
     },
 
     render: function() {
-      this.$el.html(
-        _.template(listTemplate, this.model.toJSON())
-      );
+      var template = _.template(listTemplate);
+      $(this.el).html(template(this.model.toJSON()));
       
       $('#add_item').hide();
       

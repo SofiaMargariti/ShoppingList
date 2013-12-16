@@ -17,7 +17,10 @@ define(['views/index', 'views/list', 'views/items', 'views/lists', 'views/summar
       this.showLists();
       this.list = new List({id: id});
       this.details_view = new ListView({ model: this.list });
-      this.list.fetch();
+      var that = this;
+      this.list.fetch({success: function(){
+        that.details_view.render();
+      }});
     },
     
     showLists: function(){
