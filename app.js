@@ -64,40 +64,10 @@ app.get('/api/list', function(req, res){
 
 app.get('/api/item/search/:str', function(req, res){
   str = req.params.str;
-  console.log(str);
   Item.findByString(str, function(items){
-    console.log(items);
     res.send(items);
   });
 });
-
-/*
-app.get('/api/item/:name', function(req,res){
-  itemId = req.param.name;
-  Item.findById(itemId, function(err, item){
-    res.send(item);
-  });
-});
-
-app.put('/api/item/:name', function(req, res){
-  name = req.param.name;
-  price = req.param('price', null);
-  descr = req.param('descr', '');
-
-  if (name == null || name.length < 1){
-    res.send(400);
-  }
-  
-  Item.updateitem(name, price, descr, function(item){
-      res.send(item);
-  });
-});
-
-app.delete('/api/item/:name', function(req, res){
-  Item.findById(req.param.name).remove();
-  req.send(200);
-});
-*/
 
 app.delete('/api/list/:id', function(req, res){
   List.findById(req.param.id).remove();

@@ -6,7 +6,6 @@ function(ShoppingView, ItemView, listTemplate, Item)
     
     events: {
       'submit #add_item': 'addItem',
-      'keyup input[name="name"]': 'autocomplete'
     },
 
     initialize: function(){
@@ -25,21 +24,6 @@ function(ShoppingView, ItemView, listTemplate, Item)
       this.model.get('items').push(item);
       this.model.save();
       this.render();
-    },
-
-    autocomplete: function(event){
-      var $input = $(event.target);  
-      var $form = $('#add_item');
-      str = $input.val();
-      $.ajax({
-        url: '/api/item/search/' + str,
-        method: 'get',
-        success: function(items){
-          item = items[0];
-          $input.val(item['name']);
-          $form.find('input[name="price"]').val(item['price']);
-        } 
-      });
     },
 
     render: function() {

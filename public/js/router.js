@@ -1,6 +1,5 @@
-define(['views/index', 'views/list', 'views/items', 'views/lists', 'views/summary', 'models/List', 'models/ItemCollection', 'models/ListCollection'], function(IndexView, ListView, ItemsView, ListsView, SummaryView, List, ItemCollection, ListCollection){
+define(['views/list', 'views/lists', 'models/List', 'models/ListCollection'], function(ListView, ListsView, List, ListCollection){
   var ShoppingRouter = Backbone.Router.extend({
-    current_view: null,
     lists_view: null,
     details_view: null,
     list: null,
@@ -22,11 +21,13 @@ define(['views/index', 'views/list', 'views/items', 'views/lists', 'views/summar
     },
     
     showLists: function(){
+      var that = this;
       this.lists = this.lists || new ListCollection();
       if (!this.lists_view) {
         this.lists_view = new ListsView({ model: this.lists });
-        this.lists_view.render();
-        this.lists.fetch();
+        this.lists.fetch({success: function(){
+          that.lists_view.render();
+        }});
       }
     },
 
